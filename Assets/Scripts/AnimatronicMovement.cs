@@ -56,6 +56,7 @@ public class AnimatronicMovement : MonoBehaviour
 	public int[] possibleMoves;
 	void DoMove()
 	{
+		config.BlockCameras(2.0f);
 		possibleMoves = new int[0];
 		for (int i = 0; i < moves.Length; i++)
 		{
@@ -103,8 +104,11 @@ public class AnimatronicMovement : MonoBehaviour
 
 	IEnumerator JumpScareCycle()
 	{
+		config.jumpScareInProgress = true;
+		DisableAllPositions();
 		jumpScare.SetActive(true);
 		yield return new WaitForSeconds(jumpScareDuration);
 		config.GameOver();
+		jumpScare.SetActive(false);
 	}
 }
