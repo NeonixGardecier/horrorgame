@@ -1487,6 +1487,11 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &73454393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5241267463746980526, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
+  m_PrefabInstance: {fileID: 638956200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &74006278
 GameObject:
   m_ObjectHideFlags: 0
@@ -4360,7 +4365,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-70890
+  m_Name: pb_Mesh-18818
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -16748,12 +16753,28 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5269945355364510514, guid: f2e0b7ae4dae8cf44955bccd3512b213, type: 3}
   m_PrefabInstance: {fileID: 638956200}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 73454393}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97fca36bd81de7c4cafce7bbf02ca611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1191852984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73454393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3646d806eed3385428da489913e37142, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entranceDoorOpen: 1
+  officeDoorOpen: 1
+  nightStartDelay: 6
+  jumpScareInProgress: 0
 --- !u!1 &1199827279
 GameObject:
   m_ObjectHideFlags: 0
@@ -18044,7 +18065,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-70590
+  m_Name: pb_Mesh-18518
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19171,6 +19192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1403078631}
+  - component: {fileID: 1403078632}
   m_Layer: 0
   m_Name: Bartender
   m_TagString: Untagged
@@ -19199,6 +19221,39 @@ Transform:
   m_Father: {fileID: 1924951992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1403078632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1403078630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ec377c558bb1742894d66bf2ff1ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  config: {fileID: 1191852984}
+  currentPosition: 0
+  difficulty: 100
+  positions:
+  - {fileID: 125369332}
+  - {fileID: 379535812}
+  - {fileID: 2097239507}
+  - {fileID: 1641385071}
+  - {fileID: 1083241440}
+  - {fileID: 895394468}
+  moves:
+  - {x: 0, y: 1}
+  - {x: 1, y: 2}
+  - {x: 2, y: 3}
+  - {x: 3, y: 4}
+  - {x: 4, y: 5}
+  finalPositionValue: 5
+  jumpScare: {fileID: 0}
+  jumpScareDuration: 3
+  jumpscareFailFallbackPositions: 0100000002000000
+  possibleMoves: 
 --- !u!1 &1404735728
 GameObject:
   m_ObjectHideFlags: 0
@@ -24604,7 +24659,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3726
+  m_Name: pb_Mesh-20374
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -27806,7 +27861,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-3426
+  m_Name: pb_Mesh-20074
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
