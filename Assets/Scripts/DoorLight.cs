@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DoorLight : MonoBehaviour
 {
+    public NightConfig config;
     public GameObject onLight;
     public GameObject availableLight;
     public GameObject unavailableLight;
@@ -15,18 +16,21 @@ public class DoorLight : MonoBehaviour
 
     public bool available;
 
+    public GameObject buttonSound;
+
     void OnMouseDown()
     {
         if (available)
         {
             available = false;
             StartCoroutine(lightCycle());
+            config.PlaySound(buttonSound, 0.206f);
         }
     }
 
     IEnumerator lightCycle()
     {
-        availableLight.SetActive(true);
+        availableLight.SetActive(false);
         light.SetActive(true);
         onLight.SetActive(true);
         yield return new WaitForSeconds(onTime);

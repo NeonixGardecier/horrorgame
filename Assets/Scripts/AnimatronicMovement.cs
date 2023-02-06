@@ -10,11 +10,13 @@ public class AnimatronicMovement : MonoBehaviour
 
 	[Header("Config")]
 	public float difficulty = 0; //0 - 100
+	public float moveDelay = 0;
+	public int finalPositionValue; //Array position of the final movement (typically the door)
+	public float jumpScareDuration;
+	public GameObject jumpScare;
+	public GameObject jumpscareSound;
 	public GameObject[] positions; //Works based off their numbered positions in the array for the next variable
 	public Vector2[] moves; //Value 1 is where the animatronic is moving from, Value 2 is where it can move, multiple entries for multiple choice paths
-	public int finalPositionValue; //Array position of the final movement (typically the door)
-	public GameObject jumpScare;
-	public float jumpScareDuration;
 
 	public int[] jumpscareFailFallbackPositions; //the place the animatronic will go if the jumpscare fails
 
@@ -31,16 +33,34 @@ public class AnimatronicMovement : MonoBehaviour
 	
 	IEnumerator moveCycle()
 	{
-		yield return new WaitForSeconds(5f);
+		yield return new WaitForSeconds(5f + Random.Range(0, moveDelay));
+
+		Random.seed = System.Environment.TickCount;
 		int rnd = Random.Range(0, 100);
-		if (rnd <= difficulty)
-		{
-			if (currentPosition != finalPositionValue)
-			{	
-				DoMove();
-			}else{
-				DoJumpScare();
-			}	
+		
+		if(currentPosition != finalPositionValue)
+		{	
+			if (rnd <= difficulty)
+			{
+				if (currentPosition != finalPositionValue)
+				{	
+					DoMove();
+				}else{
+					DoJumpScare();
+				}	
+			}
+		}
+		else if(currentPosition == finalPositionValue)
+		{	
+			if (rnd <= difficulty * 2)
+			{
+				if (currentPosition != finalPositionValue)
+				{	
+					DoMove();
+				}else{
+					DoJumpScare();
+				}	
+			}
 		}
 		StartCoroutine(moveCycle());
 	}
@@ -53,26 +73,21 @@ public class AnimatronicMovement : MonoBehaviour
 		}
 	}
 
-	public int[] possibleMoves;
+	public List<int> possibleMoves = new List<int>();
 	void DoMove()
 	{
-		config.BlockCameras(2.0f);
-		possibleMoves = new int[0];
+		config.BlockCameras(1.2f);
+		possibleMoves = new List<int>();
 		for (int i = 0; i < moves.Length; i++)
 		{
 			if (moves[i].x == currentPosition)
 			{
-				int[] temp = possibleMoves;
-				possibleMoves = new int[possibleMoves.Length + 1];
-				for (int o = 0; 0 < temp.Length; o++)
-				{
-					possibleMoves[o] = temp[0];
-				}
-				possibleMoves[possibleMoves.Length - 1] = (int)moves[i].y;
+				possibleMoves.Add((int)moves[i].y);
 			}
 		}
 
-		int rnd = Random.Range(0, possibleMoves.Length);
+		Random.seed = System.Environment.TickCount;
+		int rnd = Random.Range(0, possibleMoves.Count);
 		currentPosition = possibleMoves[rnd];
 		
 		DisableAllPositions();
@@ -107,6 +122,10 @@ public class AnimatronicMovement : MonoBehaviour
 		config.jumpScareInProgress = true;
 		DisableAllPositions();
 		jumpScare.SetActive(true);
+		if (jumpscareSound != null)
+		{
+			config.PlaySound(jumpscareSound, 4.41f);
+		}
 		yield return new WaitForSeconds(jumpScareDuration);
 		config.GameOver();
 		jumpScare.SetActive(false);
