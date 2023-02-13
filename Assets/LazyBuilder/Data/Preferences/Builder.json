@@ -1,0 +1,20 @@
+{
+    "LastServer": "Main",
+    "LastItem": "ATM",
+    "LastItemType": "Regular",
+    "Servers_Type": [
+        0
+    ],
+    "ServersId": [
+        "Main"
+    ],
+    "ServersSrc": [
+        "wafflesgama/LazyBuilderLibrary"
+    ],
+    "ServersBranch": [
+        "main"
+    ],
+    "PropCol": false,
+    "PropRb": false,
+    "PageSize": 200
+}

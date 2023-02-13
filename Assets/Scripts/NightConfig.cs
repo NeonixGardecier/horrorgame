@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.UI;
 
 public class NightConfig : MonoBehaviour
 {
@@ -16,6 +19,16 @@ public class NightConfig : MonoBehaviour
 	public GameObject[] cameras;
 	public GameObject[] cameraBlocks;
 
+	public AnimatronicMovement bartender;
+	public AnimatronicMovement singer;
+	public AnimatronicMovement securitybot;
+	public AnimatronicMovement waitress;
+	public AnimatronicMovement chef;
+	public Animatronic_Skeleton skeleton;
+
+	public TextMeshProUGUI TimeText;
+	public int time = 0;
+
 	public void Update()
 	{
 		if (jumpScareInProgress)
@@ -29,9 +42,31 @@ public class NightConfig : MonoBehaviour
 		}
 	}
 
+	void Start()
+	{
+		StartCoroutine(timeProgress());
+	}
+
 	public void GameOver()
 	{
-		
+		SceneManager.LoadScene("GameOver", LoadSceneMode.Single);
+	}
+
+	public void GameWin()
+	{
+		SceneManager.LoadScene("GameWin", LoadSceneMode.Single);
+	}
+
+	IEnumerator timeProgress()
+	{
+		yield return new WaitForSeconds(60f);
+		time += 1;
+		if (time >= 8)
+		{
+			GameWin();
+		}
+		TimeText.text = "" + time + " AM";
+		StartCoroutine(timeProgress());
 	}
 
 	public void PlaySound(GameObject sound, float time)

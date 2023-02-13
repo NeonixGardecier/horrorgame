@@ -52,7 +52,7 @@ public class FlashLight : MonoBehaviour
 
     IEnumerator flashlightCycle()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2.5f);
         if (config.power > 0 && isOn)
         {  
             config.power -= 1;

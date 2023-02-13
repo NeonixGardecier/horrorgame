@@ -111,6 +111,7 @@ public class Animatronic_Skeleton : MonoBehaviour
             jumpScare.SetActive(true);
 
             StartCoroutine(soundWait());
+            config.GameOver();
         }
     }
 
